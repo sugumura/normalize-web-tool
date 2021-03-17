@@ -1,1 +1,6 @@
 /** global style */
+
+.chakra-alert .chakra-icon {
+  width: 24px;
+  margin-right: 0.5rem;
+}

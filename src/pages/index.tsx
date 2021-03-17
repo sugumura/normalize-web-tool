@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { useCallback, useState } from 'react'
 import MainLayout from "@layouts/MainLayout";
-import { Box, Button, Checkbox, Table, TableCaption, Tbody, Td, Textarea, Th, Thead, Tr } from '@chakra-ui/react';
-import { CopyIcon } from '@chakra-ui/icons';
+import { Box, Checkbox, Table, TableCaption, Tbody, Td, Textarea, Th, Thead, Tr, useToast } from '@chakra-ui/react';
 import { useNormalizeText } from "@hooks/useNormalizeText";
 import CodePointText from '@atoms/CodePointText';
+import CopyButton from "@atoms/CopyButton";
 
 const AppPage = () => {
-
+  const toast = useToast()
   const [showCodePoint, setShowCodePoint] = useState<boolean>(false)
   const [text, setText] = useState<string>("")
   const [nfcText] = useNormalizeText(text, "NFC")
@@ -21,12 +21,13 @@ const AppPage = () => {
     setText(e.target.value)
   }
 
-  const onCopy = useCallback((e: React.MouseEvent<HTMLButtonElement>, text: string) => {
-    e.preventDefault()
-
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text);
-    }
+  const onCopy = useCallback(() => {
+    toast({
+      title: "Copied",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    })
   }, [])
 
   const onShowCharCode = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,14 +40,14 @@ const AppPage = () => {
     <MainLayout title="">
       <Box>
         <Textarea
-          placeholder="Here is a sample placeholder"
+          placeholder="Please input text..."
           value={text}
           onChange={onChange}
         />
         <Checkbox
           onChange={onShowCharCode}
         >
-          Show Charcode
+          Show CodePoint
         </Checkbox>
       </Box>
 
@@ -63,50 +64,38 @@ const AppPage = () => {
         <Tbody>
           <Tr>
             <Td>NFC</Td>
-            <Td>
+            <Td whiteSpace="pre-wrap">
               {nfcText}
             </Td>
             <Td>
-              <Button
-                leftIcon={<CopyIcon/>}
-                colorScheme="teal"
-                variant="outline"
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) => onCopy(e, nfcText)}>
-                Copy
-              </Button>
+              <CopyButton text={nfcText} onCopy={onCopy}/>
             </Td>
           </Tr>
           <Tr>
             <Td>NFD</Td>
-            <Td>
+            <Td whiteSpace="pre-wrap">
               {nfdText}
             </Td>
             <Td>
-              <Button leftIcon={<CopyIcon/>} colorScheme="teal" variant="outline">
-                Copy
-              </Button>
+              <CopyButton text={nfdText} onCopy={onCopy}/>
             </Td>
           </Tr>
           <Tr>
             <Td>NFKC</Td>
-            <Td>
+            <Td whiteSpace="pre-wrap">
               {nfkcText}
             </Td>
             <Td>
-              <Button leftIcon={<CopyIcon/>} colorScheme="teal" variant="outline">
-                Copy
-              </Button>
+              <CopyButton text={nfkcText} onCopy={onCopy}/>
             </Td>
           </Tr>
           <Tr>
             <Td>NFKD</Td>
-            <Td>
+            <Td whiteSpace="pre-wrap">
               {nfkdText}
             </Td>
             <Td>
-              <Button leftIcon={<CopyIcon/>} colorScheme="teal" variant="outline">
-                Copy
-              </Button>
+              <CopyButton text={nfkdText} onCopy={onCopy}/>
             </Td>
           </Tr>
 
@@ -118,13 +107,6 @@ const AppPage = () => {
                   <CodePointText text={text} />
                 </Td>
                 <Td>
-                  <Button
-                    leftIcon={<CopyIcon/>}
-                    colorScheme="teal"
-                    variant="outline"
-                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => onCopy(e, nfcText)}>
-                    Copy
-                  </Button>
                 </Td>
               </Tr>
               <Tr>
@@ -133,13 +115,6 @@ const AppPage = () => {
                   <CodePointText text={nfcText} />
                 </Td>
                 <Td>
-                  <Button
-                    leftIcon={<CopyIcon/>}
-                    colorScheme="teal"
-                    variant="outline"
-                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => onCopy(e, nfcText)}>
-                    Copy
-                  </Button>
                 </Td>
               </Tr>
               <Tr>
@@ -148,9 +123,6 @@ const AppPage = () => {
                   <CodePointText text={nfdText} />
                 </Td>
                 <Td>
-                  <Button leftIcon={<CopyIcon/>} colorScheme="teal" variant="outline">
-                    Copy
-                  </Button>
                 </Td>
               </Tr>
               <Tr>
@@ -159,9 +131,6 @@ const AppPage = () => {
                   <CodePointText text={nfkcText} />
                 </Td>
                 <Td>
-                  <Button leftIcon={<CopyIcon/>} colorScheme="teal" variant="outline">
-                    Copy
-                  </Button>
                 </Td>
               </Tr>
               <Tr>
@@ -170,9 +139,6 @@ const AppPage = () => {
                   <CodePointText text={nfkdText} />
                 </Td>
                 <Td>
-                  <Button leftIcon={<CopyIcon/>} colorScheme="teal" variant="outline">
-                    Copy
-                  </Button>
                 </Td>
               </Tr>
             </>

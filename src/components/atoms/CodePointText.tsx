@@ -12,8 +12,11 @@ const CodePointText: React.VFC<Props> = ({
     if (!text || text.length === 0) return text
 
     const codeUnits = [];
-    for (let i = 0; i < text.length; i++) {
-      codeUnits.push(text.charCodeAt(i).toString(16));
+    for (let c of text) {
+      const codePoint = c.codePointAt(0)
+      if (codePoint) {
+        codeUnits.push(`0x${codePoint.toString(16)}`)
+      }
     }
     return codeUnits;
   }, [text])
