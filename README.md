@@ -10,3 +10,8 @@ $ yarn
 $ yarn run dev
 # access to http://localhost:3000
 ```
+## deploy
+
+```
+$ git push
+```

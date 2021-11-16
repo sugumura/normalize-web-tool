@@ -4,7 +4,11 @@
     "module": "esnext",
     "target": "es6",
     "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,18 +20,45 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@styles/*": ["src/styles/*"],
-      "@pages/*": ["src/pages/*"],
-      "@app/*": ["src/app/*"],
-      "@layouts/*": ["src/components/layouts/*"],
-      "@atoms/*": ["src/components/atoms/*"],
-      "@molecules/*": ["src/components/molecules/*"],
-      "@organisms/*": ["src/components/organisms/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@contexts/*": ["src/contexts/*"],
-      "@utils/*": ["src/utils/*"]
-    }
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@layouts/*": [
+        "src/components/layouts/*"
+      ],
+      "@atoms/*": [
+        "src/components/atoms/*"
+      ],
+      "@molecules/*": [
+        "src/components/molecules/*"
+      ],
+      "@organisms/*": [
+        "src/components/organisms/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
+      "@contexts/*": [
+        "src/contexts/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ]
+    },
+    "incremental": true
   },
-  "include": ["next-env.d.ts", "src/**/*"],
-  "exclude": ["node_modules", "public"]
+  "include": [
+    "next-env.d.ts",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "public"
+  ]
 }
