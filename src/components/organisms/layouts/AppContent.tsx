@@ -6,7 +6,7 @@ type Props = Partial<{
 
 const AppContent: React.FC<Props> = ({ children }) => {
   return (
-    <Box as="main" mt={5}>
+    <Box as="main" m={5}>
       {children}
     </Box>
   )
